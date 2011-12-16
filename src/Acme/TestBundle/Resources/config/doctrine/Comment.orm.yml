@@ -1,0 +1,16 @@
+Acme\TestBundle\Entity\Comment:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    author:
+      type: string
+      length: 255
+    body:
+      type: string
+      length: 255
+  lifecycleCallbacks: {  }
