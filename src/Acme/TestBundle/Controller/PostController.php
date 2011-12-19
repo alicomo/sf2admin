@@ -3,9 +3,11 @@
 namespace Acme\TestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use DoctrineExtensions\Paginate\Paginate;
 
 use Acme\TestBundle\Entity\Post;
 use Acme\TestBundle\Form\PostType;
+
 
 /**
  * Post controller.
@@ -22,8 +24,18 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('AcmeTestBundle:Post')->findAll();
+        //$entities = $em->getRepository('AcmeTestBundle:Post')->findAll();
+        $page = 2;
+        $limit = 2;
+        $dql = $em->createQueryBuilder()
+                ->add('select', 'p')
+                ->add('from', 'AcmeTestBundle:Post p')
+                ->add('orderBy', 'p.title ASC');
+        $query = $em->createQuery($dql);
 
+        $count = Paginate::getTotalQueryResults($query); 
+        $paginateQuery = Paginate::getPaginateQuery($query, $page, $limit); 
+        $entities = $paginateQuery->getResult();
         return $this->render('AcmeTestBundle:Post:index.html.twig', array(
             'entities' => $entities
         ));

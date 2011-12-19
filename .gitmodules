@@ -1,0 +1,9 @@
+[submodule "vendor/doctrine-extensions"]
+	path = vendor/doctrine-extensions
+	url = git://github.com/l3pp4rd/DoctrineExtensions.git
+[submodule "vendor/bundles/Stof/DoctrineExtensionsBundle"]
+	path = vendor/bundles/Stof/DoctrineExtensionsBundle
+	url = git://github.com/stof/StofDoctrineExtensionsBundle.git
+[submodule "vendor/doctrine-pager"]
+	path = vendor/doctrine-pager
+	url = git://github.com/beberlei/DoctrineExtensions.git
