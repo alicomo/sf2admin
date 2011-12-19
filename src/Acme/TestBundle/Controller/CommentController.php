@@ -4,35 +4,27 @@ namespace Acme\TestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-
-use Acme\TestBundle\Entity\Post;
-use Acme\TestBundle\Form\PostType;
-
+use Acme\TestBundle\Entity\Comment;
+use Acme\TestBundle\Form\CommentType;
 
 /**
- * Post controller.
+ * Comment controller.
  *
  */
-class PostController extends Controller
+class CommentController extends Controller
 {
     /**
      * default theme
-     * Lists all Post entities.
+     * Lists all Comment entities.
      *
      */
     public function indexAction($page)
     {
         $em = $this->getDoctrine()->getEntityManager();
-
-        //$entities = $em->getRepository('AcmeTestBundle:Post')->findAll();
-        
         $limit = 5;
         $dql = $em->createQueryBuilder()
                 ->add('select', 'p')
-                ->add('from', 'AcmeTestBundle:Post p');
-                //->add('orderBy', 'p.title ASC');
+                ->add('from', 'AcmeTestBundle:Comment e');
         $query = $em->createQuery($dql);
 
         $adapter = new DoctrineORMAdapter($query);
@@ -40,29 +32,28 @@ class PostController extends Controller
         $pager->setMaxPerPage($limit);
         $pager->setCurrentPage($page);
         $entities = $pager->getCurrentPageResults();
- 
-        return $this->render('AcmeTestBundle:Post:index.html.twig', array(
+        return $this->render('AcmeTestBundle:Comment:index.html.twig', array(
             'entities' => $entities
         ));
     }
 
     /**
-     * Finds and displays a Post entity.
+     * Finds and displays a Comment entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AcmeTestBundle:Post')->find($id);
+        $entity = $em->getRepository('AcmeTestBundle:Comment')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+            throw $this->createNotFoundException('Unable to find Comment entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeTestBundle:Post:show.html.twig', array(
+        return $this->render('AcmeTestBundle:Comment:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
 
@@ -70,29 +61,29 @@ class PostController extends Controller
     }
 
     /**
-     * Displays a form to create a new Post entity.
+     * Displays a form to create a new Comment entity.
      *
      */
     public function newAction()
     {
-        $entity = new Post();
-        $form   = $this->createForm(new PostType(), $entity);
+        $entity = new Comment();
+        $form   = $this->createForm(new CommentType(), $entity);
 
-        return $this->render('AcmeTestBundle:Post:new.html.twig', array(
+        return $this->render('AcmeTestBundle:Comment:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
         ));
     }
 
     /**
-     * Creates a new Post entity. Shaduli.
+     * Creates a new Comment entity. Shaduli.
      *
      */
     public function createAction()
     {
-        $entity  = new Post();
+        $entity  = new Comment();
         $request = $this->getRequest();
-        $form    = $this->createForm(new PostType(), $entity);
+        $form    = $this->createForm(new CommentType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -100,34 +91,34 @@ class PostController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('comment_show', array('id' => $entity->getId())));
             
         }
 
-        return $this->render('AcmeTestBundle:Post:new.html.twig', array(
+        return $this->render('AcmeTestBundle:Comment:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
         ));
     }
 
     /**
-     * Displays a form to edit an existing Post entity.
+     * Displays a form to edit an existing Comment entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AcmeTestBundle:Post')->find($id);
+        $entity = $em->getRepository('AcmeTestBundle:Comment')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+            throw $this->createNotFoundException('Unable to find Comment entity.');
         }
 
-        $editForm = $this->createForm(new PostType(), $entity);
+        $editForm = $this->createForm(new CommentType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AcmeTestBundle:Post:edit.html.twig', array(
+        return $this->render('AcmeTestBundle:Comment:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -135,20 +126,20 @@ class PostController extends Controller
     }
 
     /**
-     * Edits an existing Post entity.
+     * Edits an existing Comment entity.
      *
      */
     public function updateAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AcmeTestBundle:Post')->find($id);
+        $entity = $em->getRepository('AcmeTestBundle:Comment')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+            throw $this->createNotFoundException('Unable to find Comment entity.');
         }
 
-        $editForm   = $this->createForm(new PostType(), $entity);
+        $editForm   = $this->createForm(new CommentType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -159,10 +150,10 @@ class PostController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('comment_edit', array('id' => $id)));
         }
 
-        return $this->render('AcmeTestBundle:Post:edit.html.twig', array(
+        return $this->render('AcmeTestBundle:Comment:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -170,7 +161,7 @@ class PostController extends Controller
     }
 
     /**
-     * Deletes a Post entity.
+     * Deletes a Comment entity.
      *
      */
     public function deleteAction($id)
@@ -182,17 +173,17 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('AcmeTestBundle:Post')->find($id);
+            $entity = $em->getRepository('AcmeTestBundle:Comment')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Post entity.');
+                throw $this->createNotFoundException('Unable to find Comment entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('post'));
+        return $this->redirect($this->generateUrl('comment'));
     }
 
     private function createDeleteForm($id)

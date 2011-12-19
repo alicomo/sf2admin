@@ -7,3 +7,9 @@
 [submodule "vendor/doctrine-pager"]
 	path = vendor/doctrine-pager
 	url = git://github.com/beberlei/DoctrineExtensions.git
+[submodule "vendor/pagerfanta"]
+	path = vendor/pagerfanta
+	url = http://github.com/whiteoctober/Pagerfanta.git
+[submodule "vendor/bundles/WhiteOctober/PagerfantaBundle"]
+	path = vendor/bundles/WhiteOctober/PagerfantaBundle
+	url = http://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git

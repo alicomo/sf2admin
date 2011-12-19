@@ -6,3 +6,7 @@ AcmeTestBundle_post:
     resource: "@AcmeTestBundle/Resources/config/routing/post.yml"
     prefix:   /post
 
+AcmeTestBundle_comment:
+    resource: "@AcmeTestBundle/Resources/config/routing/comment.yml"
+    prefix:   /comment
+

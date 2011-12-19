@@ -1,7 +1,9 @@
 {% if 'index' in actions %}
 {{ route_name_prefix }}:
-    pattern:  /
-    defaults: { _controller: "{{ bundle }}:{{ entity }}:index" }
+    pattern:  /{page}
+    defaults: { _controller: "{{ bundle }}:{{ entity }}:index", page: 1 }
+    requirements:
+      page: \d+
 {% endif %}
 
 {% if 'show' in actions %}

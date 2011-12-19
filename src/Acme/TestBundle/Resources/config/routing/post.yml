@@ -1,6 +1,8 @@
 post:
-    pattern:  /
-    defaults: { _controller: "AcmeTestBundle:Post:index" }
+    pattern:  /{page}
+    defaults: { _controller: "AcmeTestBundle:Post:index", page: 1 }
+    requirements:
+      page: \d+
 
 post_show:
     pattern:  /{id}/show

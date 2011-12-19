@@ -16,7 +16,9 @@ $loader->registerNamespaces(array(
     'Metadata'         => __DIR__.'/../vendor/metadata/src',
     'Stof'  => __DIR__.'/../vendor/bundles',
     'Gedmo' => __DIR__.'/../vendor/doctrine-extensions/lib',
-    'DoctrineExtensions' => __DIR__.'/../vendor/doctrine-pager/lib'
+    'DoctrineExtensions' => __DIR__.'/../vendor/doctrine-pager/lib',
+    'WhiteOctober\PagerfantaBundle' => __DIR__.'/../vendor/bundles',
+    'Pagerfanta'                    => __DIR__.'/../vendor/pagerfanta/src',
 
 ));
 $loader->registerPrefixes(array(

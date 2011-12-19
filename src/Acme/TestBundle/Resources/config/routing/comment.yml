@@ -1,0 +1,32 @@
+comment:
+    pattern:  /{page}
+    defaults: { _controller: "AcmeTestBundle:Comment:index", page: 1 }
+    requirements:
+      page: \d+
+
+comment_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AcmeTestBundle:Comment:show" }
+
+comment_new:
+    pattern:  /new
+    defaults: { _controller: "AcmeTestBundle:Comment:new" }
+
+comment_create:
+    pattern:  /create
+    defaults: { _controller: "AcmeTestBundle:Comment:create" }
+    requirements: { _method: post }
+
+comment_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AcmeTestBundle:Comment:edit" }
+
+comment_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AcmeTestBundle:Comment:update" }
+    requirements: { _method: post }
+
+comment_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AcmeTestBundle:Comment:delete" }
+    requirements: { _method: post }
