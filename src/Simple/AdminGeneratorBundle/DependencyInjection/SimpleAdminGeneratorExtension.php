@@ -26,6 +26,5 @@ class SimpleAdminGeneratorExtension extends Extension
         $loader->load('services.yml');
         $container->setParameter('simple_admin_generator.theme', $config['theme']);
         
-//        print_r($config); exit;
     }
 }
